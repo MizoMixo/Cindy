@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regalito</title>
+  
+  <style>
+    body {
+      margin: 0;
+      background-color: red;
+      background-image: radial-gradient(circle, #f87474 4px, red 1px);
+      background-size: 20px 20px;
+      font-family: sans-serif;
+      color: white;
+  
+      overflow-x: hidden;
+    }
+  
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      padding-bottom: 10px;
+      text-shadow:
+        -2px -1px 0 black,
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
+  
+    }
+  
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+  
+    h2 {
+      font-size: 1.2em;
+      font-weight: normal;
+    }
+
+    h3 {
+      font-size: 1.4em;
+      text-decoration-line: underline;
+    }
+  
+    .card {
+      background: rgba(0, 0, 0, 0.6);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 20px;
+      max-width: 600px;
+    }
+  
+    .msg {
+      white-space: pre-wrap;
+      font-size: 1.1em;
+      line-height: 1.5em;
+    }
+  
+    .carousel {
+      position: relative;
+      text-align: center;
+    }
+  
+    .carousel img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  
+    .carousel p {
+      margin-top: 10px;
+    }
+  
+    .carousel button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 2em;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  
+    .carousel .prev {
+      left: 10px;
+    }
+  
+    .carousel .next {
+      right: 10px;
+    }
+
+    .card2{
+      margin-bottom: 70px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>¡Feliz Cumple, Cindy! 🍄</h1>
+    <h2>Siempre aquí para ti. Con todo mi cariño.</h2>
+  </header>
+
+  <main>
+    <section class="card">
+      <h3>Un mensajito para ti 💌</h3>
+      <p class="msg">Helouu Cindy feli cumpleañitos te deseo lo mejor de todo corazon, para mi eres una gran persona y amiga, te agradesco mucho tu compañia y tu aprecio, no sabes lo mucho que ha significado o marcado en mi vida el solo hecho que estes en ella kkjksdkh, y se que me ha costado un poquito el presente últimamente y que hemos tenido un par de conflictos, pero apesar de todo eso seguimos siendo buenos amigos, espero podamos ser amigos por muchos años mas y podamos vernos en persona.. seria todo un sueñito. Apuesto mucho por esta amistad como ninguna anterior que he tenido y lo digo muy enserio, talves me cueste pero yo estoy completamente dispuesto para lo nuestro no sea algo pasajero. Estoy muy felx por lo que has podido lograr y construir en este añito, formaste una bonita comunidad y cuentas con muchos mas amiguitos que te valoran por lo q eres, y tampoco dejo atras tu esfuerzo en tus estudios y tu determinacion para alcanzar tus metas.. Eres genial cindy t qiero mucho 💗💗💗
+      </p>
+    </section>
+
+    <section class="card card2">
+      <h3>Recuerdos bonillos 📸📸💗</h3>
+      <div class="carousel">
+        <button class="prev">❮</button>
+        <div class="slide">
+          <img id="carousel-img" src="" alt="Recuerdo" />
+          <p id="carousel-desc"></p>
+        </div>
+        <button class="next">❯</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Carrusel de imágenes
+    const recuerdos = [
+      {
+        img: 'fotos.png',
+        desc: 'JDKDKD primera sesion de fotos (salimos guapas)'
+      },
+      {
+        img: 'dibujo.jpg',
+        desc: 'Me pase un buen de horas haciendo el dibujo pero sin duda valio la pena'
+      },
+      {
+        img: 'fantasmas.png',
+        desc: 'Me la pase super jugando ese dia la verdad'
+      },
+      {
+        img: 'nieve.png',
+        desc: 'De nuestras primeras fotitos juntos se la recuerda con cariño ⛰️'
+      }
+    ];
+
+
+    let currentIndex = 0;
+    const imgEl = document.getElementById('carousel-img');
+    const descEl = document.getElementById('carousel-desc');
+
+
+    function showSlide(index) {
+      const item = recuerdos[index];
+      imgEl.src = item.img;
+      descEl.textContent = item.desc;
+    }
+
+
+    document.querySelector('.prev').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + recuerdos.length) % recuerdos.length;
+      showSlide(currentIndex);
+    });
+
+
+    document.querySelector('.next').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % recuerdos.length;
+      showSlide(currentIndex);
+    });
+
+
+    showSlide(currentIndex);
+
+    // 🌸 Corazones siguiendo el cursor
+      document.addEventListener('mousemove', e => {
+        const heart = document.createElement('div');
+        heart.textContent = '🍄';
+        heart.style.position = 'fixed';
+        heart.style.left = e.clientX + 'px';
+        heart.style.top = e.clientY + 'px';
+        heart.style.pointerEvents = 'none';
+        heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+        heart.style.opacity = 1;
+        document.body.appendChild(heart);
+
+        let fade = setInterval(() => {
+          heart.style.top = parseFloat(heart.style.top) - 1 + 'px';
+          heart.style.opacity -= 0.1;
+          if (heart.style.opacity <= 0.1) {
+            heart.remove();
+            clearInterval(7);
+          }
+        }, 20);
+      });
+  </script>
+</body>
+</html>
